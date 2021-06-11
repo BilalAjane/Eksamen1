@@ -76,14 +76,14 @@ public class KommuneController {
     }
 
 
-    @PostMapping("/gemKommune")
+    @PostMapping("/saveKommune")
     public String SaveKommune(@ModelAttribute("kommune") Kommune kommune){
         // Gem Kommune til database
         kommuneService.saveKommune(kommune);
         return "redirect:/";
     }
 
-    @PostMapping("/gemSogn")
+    @PostMapping("/saveSogn")
     public String SaveSogn(@ModelAttribute("sogn") Sogn sogn){
         // Gem Kommune til database
         sognService.saveSogn(sogn);

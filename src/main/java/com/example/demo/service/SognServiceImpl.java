@@ -16,7 +16,7 @@ public class SognServiceImpl implements SognService {
 
     @Override
     public List<Sogn> getAllSogn() {
-        return sognRepo.findAll();
+        return (List<Sogn>) sognRepo.findAll();
     }
 
     @Override

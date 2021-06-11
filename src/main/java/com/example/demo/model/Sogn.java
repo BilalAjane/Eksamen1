@@ -21,7 +21,7 @@ public class Sogn {
     private LocalDate nedlukningsdato;
 
     @ManyToOne
-    @JoinColumn(name = "sogn_kommune_id")
+    @JoinColumn(name = "kommune_id")
     private Kommune kommune;
 
     public Sogn() {

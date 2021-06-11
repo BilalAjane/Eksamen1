@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "kommune")
@@ -14,8 +15,17 @@ public class Kommune {
     private long kommunekode;
     private String kommunenavn;
 
-    @OneToMany(mappedBy = "kommune",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private List<Sogn> sogne;
+    @OneToMany(mappedBy = "kommune",cascade = CascadeType.ALL)
+    private Set<Sogn> sogne;
+
+    public Kommune() {
+    }
+
+    public Kommune(long kommunekode, String kommunenavn, Set<Sogn> sogne) {
+        this.kommunekode = kommunekode;
+        this.kommunenavn = kommunenavn;
+        this.sogne = sogne;
+    }
 
     public long getId() {
         return id;

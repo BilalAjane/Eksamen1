@@ -16,7 +16,7 @@ public class KommuneServiceImpl implements KommuneService{
 
     @Override
     public List<Kommune> getAllKommuner() {
-        return kommuneRepo.findAll();
+        return (List<Kommune>) kommuneRepo.findAll();
     }
 
     @Override
