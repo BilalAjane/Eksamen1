@@ -20,20 +20,11 @@ public class KommuneController {
 
     //Display list of kommuner
     @GetMapping("/")
-    public String index(Model model, Model model1) {
+    public String index(Model model) {
       model.addAttribute("kommuneliste", kommuneService.getAllKommuner());
       model.addAttribute("sognliste", sognService.getAllSogn());
       return "index";
     }
-
-    /*
-    @RequestMapping(value = "ny_kommune", method = RequestMethod.GET)
-    public String showNewKommuneForm(Model model) {
-        Kommune kommune = new Kommune();
-        model.addAttribute("Kommune",kommune);
-        return "ny_kommune";
-    }
-     */
 
     @GetMapping("/showNewKommuneForm")
     public String showNewKommuneForm(Model model) {
@@ -70,7 +61,7 @@ public class KommuneController {
 
     @GetMapping("/deleteKommune/{id}")
     public String deleteKommunde(@PathVariable (value = "id") long id) {
-        // Call delete Sogn method
+        // Call delete kommune method
         this.kommuneService.deleteKommuneById(id);
         return "redirect:/";
     }
@@ -85,7 +76,7 @@ public class KommuneController {
 
     @PostMapping("/saveSogn")
     public String SaveSogn(@ModelAttribute("sogn") Sogn sogn){
-        // Gem Kommune til database
+        // Gem Sogn til database
         sognService.saveSogn(sogn);
         return "redirect:/";
     }

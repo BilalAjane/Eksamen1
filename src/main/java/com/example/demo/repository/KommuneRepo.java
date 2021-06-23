@@ -5,7 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface KommuneRepo extends CrudRepository<Kommune, Long> {
+public interface KommuneRepo extends JpaRepository<Kommune, Long> {
+
+    Optional<Kommune> findKommuneByKommunenavn(String navn);
 
 }

@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.model.DTO.SognDTO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -15,26 +17,34 @@ public class Sogn {
 
     private long sognkode;
     private String sognnavn;
-    private long smitteniveau;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate nedlukningsdato;
+    private long smitteniveau;
+
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "kommune_id")
     private Kommune kommune;
 
     public Sogn() {
     }
 
-    public Sogn(long id, long sognkode, String sognnavn, long smitteniveau, LocalDate nedlukningsdato, Kommune kommune) {
-        this.id = id;
+    public Sogn(long sognkode, String sognnavn, long smitteniveau, LocalDate nedlukningsdato, Kommune kommune) {
         this.sognkode = sognkode;
         this.sognnavn = sognnavn;
         this.smitteniveau = smitteniveau;
         this.nedlukningsdato = nedlukningsdato;
         this.kommune = kommune;
     }
+
+    public Sogn(SognDTO sognDTO, Kommune kommunekode){
+        this.sognnavn = sognDTO.getSognnavn();
+        this.sognkode = sognDTO.getSognkode();
+        this.kommune = kommunekode;
+    }
+
 
     public long getId() {
         return id;
@@ -75,4 +85,8 @@ public class Sogn {
     public void setNedlukningsdato(LocalDate nedlukningsdato) {
         this.nedlukningsdato = nedlukningsdato;
     }
+
+    public Kommune getKommune() { return kommune; }
+
+    public void setKommune(Kommune kommune) { this.kommune = kommune; }
 }

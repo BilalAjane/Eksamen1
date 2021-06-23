@@ -23,8 +23,8 @@
         <thead>
         <tr>
             <th> Kommune</th>
-
             <th> Kommune Kode</th>
+            <th> Samlet Smiteniveau </th>
             <th> Sogn</th>
         </tr>
         </thead>
@@ -32,17 +32,18 @@
         <tbody>
         <tr th:each="kommune : ${kommuneliste}">
             <td th:text="${kommune.kommunenavn}"></td>
-            <td th:text="${kommune.kommunekode}"></td>
-
+            <td th:text="${kommune.kommuneid}"></td>
+            <td th:text="${kommune.samletsmitteniveau}"></td>
             <td>
                 <table>
                     <a th:href="@{/showNewSognForm}" class="btn btn-primary btn-sm mb-3"> Tilføj Sogn </a>
-                    <a th:href="@{/deleteKommune/{id}(id=${kommune.id})}" class="btn btn-danger btn-sm mb-3 float-right" >Slet Kommune</a>
+                    <a th:href="@{/deleteKommune/{id}(id=${kommune.kommuneid})}" class="btn btn-danger btn-sm mb-3 float-right" >Slet Kommune</a>
                     <tr>
                         <th> Sogn navn</th>
                         <th> Sogn Kode</th>
                         <th> Smiteniveau</th>
-                        <th> Nedlukningsdato (YYYY-MM-DD</th>
+                        <th> Nedlukningsdato</th>
+                        <th> Status </th>
                         <th> Actions</th>
                     </tr>
                     <tbody>
@@ -51,9 +52,11 @@
                         <td th:text="${sogn.sognkode}"></td>
                         <td th:text="${sogn.smitteniveau}"></td>
                         <td th:text="${sogn.nedlukningsdato}"></td>
+                        <th th:if="${sogn.nedlukket}"></i> NEDLUKKET </th>
+                        <th th:unless="${sogn.nedlukket}"></i> ÅBENT </th>
                         <td>
-                            <a th:href="@{/showFormForUpdate/{id}(id=${sogn.id})}" class="btn btn-primary">Opdater</a>
-                            <a th:href="@{/deleteSogn/{id}(id=${sogn.id})}" class="btn btn-danger">Slet</a>
+                            <a th:href="@{/showFormForUpdate/{id}(id=${sogn.sognid})}" class="btn btn-primary">Opdater</a>
+                            <a th:href="@{/deleteSogn/{id}(id=${sogn.sognid})}" class="btn btn-danger">Slet</a>
                         </td>
                     </tr>
                     </tbody>
